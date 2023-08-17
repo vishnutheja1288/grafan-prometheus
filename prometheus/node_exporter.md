@@ -1,14 +1,19 @@
 Install Node Exporter on Ubuntu
 =================================
 wget https://github.com/prometheus/node_exporter/releases/download/v1.2.0/node_exporter-1.2.0.linux-amd64.tar.gz
+
 sudo tar xvzf node_exporter-1.2.0.linux-amd64.tar.gz
+
 cd node_exporter-1.2.0.linux-amd64
+
 sudo cp node_exporter /usr/local/bin
 
 Creating Node Exporter Systemd service
 ==========================================
 cd /lib/systemd/system
+
 sudo nano node_exporter.service
+
 [Unit]
 Description=Node Exporter
 Wants=network-online.target
@@ -32,15 +37,20 @@ WantedBy=multi-user.target
 
 
 sudo systemctl daemon-reload
+
 sudo systemctl enable node_exporter
+
 sudo systemctl start node_exporter
+
 sudo systemctl status node_exporter
 
 
 Configure the Node Exporter as a Prometheus target
 ====================================================================================
 cd /etc/prometheus
+
 sudo nano prometheus.yml
+
 - targets: [‘localhost:9090’, ‘localhost:9100’]
 
 ********************************
